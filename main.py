@@ -15,9 +15,14 @@
 # [START app]
 import logging
 
+import json
+
 import httplib2
  
 from oauth2client.contrib import gce
+from oauth2client.contrib.appengine import AppAssertionCredentials
+from google.appengine.api import memcache
+from googleapiclient.discovery import build
  
 from flask import Flask
 
@@ -28,19 +33,21 @@ if __name__ == '__main__':
 
 @app.route('/')
 def hello():
-    return 'Hello World!'
+    return 'Hello World1111!'
 	
 @app.route('/vm/start')
 def start_vm():
 	credentials = AppAssertionCredentials(scope='https://www.googleapis.com/auth/compute')
+	logging.debug(memcache)
 	http = credentials.authorize(httplib2.Http(memcache))
-	compute = discovery.build('compute', 'v1', http=http)
+	logging.debug(http)
+	compute = build('compute', 'v1')
 
 	# Start the VM!
-	result = compute.instances().start(instance=jocsub-1, zone=asia-northeast1-b, project=Jocc).execute()
+	# result = compute.instances().start(instance='jocsub-1', zone='asia-northeast1-b', project='jocc-121ee').execute()
+	result = compute.instances().start(instance='joc-singapore', zone='asia-southeast1-b', project='jocc-121ee').execute()
 	logging.debug(result)
 	return json.dumps(result, indent=4)
-
 
 @app.errorhandler(500)
 def server_error(e):
