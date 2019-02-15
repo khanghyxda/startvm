@@ -45,7 +45,7 @@ def start_vm():
 
 	# Start the VM!
 	# result = compute.instances().start(instance='jocsub-1', zone='asia-northeast1-b', project='jocc-121ee').execute()
-	result = compute.instances().start(instance='joc-singapore', zone='asia-southeast1-b', project='jocc-121ee').execute()
+	result = compute.instances().start(instance='swing', zone='asia-southeast1-b', project='sage-buttress-226108').execute()
 	logging.debug(result)
 	return json.dumps(result, indent=4)
 
