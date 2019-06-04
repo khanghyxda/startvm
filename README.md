@@ -11,4 +11,5 @@ Engine Standard.
 For more information, see the [App Engine Standard README](../../README.md)
 
 sudo pip install -t lib -r requirements.txt
+
 gcloud app deploy app.yaml cron.yaml
